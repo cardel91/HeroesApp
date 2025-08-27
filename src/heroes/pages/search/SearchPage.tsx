@@ -1,8 +1,13 @@
+import { HeadComponent } from "@/components/custom/HeadComponent";
+import { HeroStats } from "@/heroes/components/HeroStats";
 
 
 const SearchPage = () => {
     return (
-        <div>SearchPage</div>
+        <>
+            <HeadComponent title="Universo de heroes" description="Descubre, explota y descarta super heroes y villanos" />
+            <HeroStats />
+        </>
     )
 }
 
