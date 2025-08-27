@@ -1,6 +1,5 @@
 import { Badge } from "@/components/ui/badge"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Heart, Trophy, User, Users, Zap } from "lucide-react"
+import { Heart, Trophy, Users, Zap } from "lucide-react"
 import { HeroStatsCard } from "./HeroStatsCard"
 
 export const HeroStats = () => {
