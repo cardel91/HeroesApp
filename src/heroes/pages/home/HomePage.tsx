@@ -7,9 +7,11 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
 import { HeadComponent } from "@/components/custom/HeadComponent"
 import { HeroStats } from "@/heroes/components/HeroStats"
 import { HeroGrid } from "@/heroes/components/HeroGrid"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { CustomPagination } from "@/heroes/components/custom/CustomPagination"
 import { CustomBreadcrumbs } from "@/heroes/components/custom/CustomBreadCrumbs"
+import { getHeroesByPage } from "@/heroes/actions/get-heroes-by-page.action"
+import { get } from "http"
 
 
 
@@ -20,6 +22,15 @@ export const HomePage = () => {
         "favorites" |
         "heroes" |
         "villains">("all");
+
+
+    useEffect(() => {
+        getHeroesByPage().then((heroes) => {
+            console.log(heroes);
+        });
+    }, []);
+
+
 
     return (
         <>
