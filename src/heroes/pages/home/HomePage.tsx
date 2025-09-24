@@ -14,6 +14,9 @@ import { getHeroesByPageAction } from "@/heroes/actions/get-heroes-by-page.actio
 import { useQuery } from "@tanstack/react-query"
 import { useSearchParams } from "react-router"
 import { useMemo } from "react"
+// import { getSummaryAction } from "@/heroes/actions/get-summary.action"
+import { useHeroSummary } from "@/heroes/hooks/useHeroSummary"
+import { usePaginatedHero } from "@/heroes/hooks/usePaginatedHero"
 
 
 
@@ -35,13 +38,21 @@ export const HomePage = () => {
     //     "heroes" |
     //     "villains">("all");
 
-    const { data: heroesResponse } = useQuery({
-        queryKey: ['heroes', { page, limit }],
-        queryFn: () => getHeroesByPageAction(+page, +limit),
-        staleTime: 1000 * 60 * 5
-    });
+    // const { data: heroesResponse } = useQuery({
+    //     queryKey: ['heroes', { page, limit }],
+    //     queryFn: () => getHeroesByPageAction(+page, +limit),
+    //     staleTime: 1000 * 60 * 5
+    // });
 
+    const { data: heroesResponse } = usePaginatedHero(+page, +limit, (1000 * 60 * 5));
 
+    // const { data: summary } = useQuery({
+    //     queryKey: ['summary-info'],
+    //     queryFn: getSummaryAction,
+    //     staleTime: 1000 * 60 * 5
+    // });
+
+    const { data: summary } = useHeroSummary();
 
 
     return (
@@ -64,7 +75,7 @@ export const HomePage = () => {
                                 prev.set("tab", "all");
                                 return prev;
                             })}
-                            value="all">All Characters (16)</TabsTrigger>
+                            value="all">All Characters ({summary?.totalHeroes})</TabsTrigger>
                         <TabsTrigger
                             onClick={() => setSearchParams((prev) => {
                                 prev.set("tab", "favorites");
@@ -78,13 +89,13 @@ export const HomePage = () => {
                             onClick={() => setSearchParams((prev) => {
                                 prev.set("tab", "heroes");
                                 return prev;
-                            })} value="heroes">Heroes (12)</TabsTrigger>
+                            })} value="heroes">Heroes ({summary?.heroCount})</TabsTrigger>
                         <TabsTrigger
                             onClick={() => setSearchParams((prev) => {
                                 prev.set("tab", "villains");
                                 return prev;
                             })}
-                            value="villains">Villains (2)</TabsTrigger>
+                            value="villains">Villains ({summary?.villainCount})</TabsTrigger>
                     </TabsList>
                     <TabsContent value="all">
                         <HeroGrid heroes={heroesResponse?.heroes ?? []} />
