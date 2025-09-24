@@ -10,8 +10,8 @@ import { HeroGrid } from "@/heroes/components/HeroGrid"
 // import { useState } from "react"
 import { CustomPagination } from "@/heroes/components/custom/CustomPagination"
 import { CustomBreadcrumbs } from "@/heroes/components/custom/CustomBreadcrumbs"
-import { getHeroesByPageAction } from "@/heroes/actions/get-heroes-by-page.action"
-import { useQuery } from "@tanstack/react-query"
+// import { getHeroesByPageAction } from "@/heroes/actions/get-heroes-by-page.action"
+// import { useQuery } from "@tanstack/react-query"
 import { useSearchParams } from "react-router"
 import { useMemo } from "react"
 // import { getSummaryAction } from "@/heroes/actions/get-summary.action"
@@ -27,6 +27,7 @@ export const HomePage = () => {
     const activeTab = searchParams.get("tab") ?? "all";
     const page = searchParams.get("page") ?? "1";
     const limit = searchParams.get("limit") ?? "6";
+    const category = searchParams.get('category') ?? "all";
 
     const selectedTab = useMemo(() => {
         const validTabs = ["all", "favorites", "heroes", "villains"];
@@ -44,7 +45,7 @@ export const HomePage = () => {
     //     staleTime: 1000 * 60 * 5
     // });
 
-    const { data: heroesResponse } = usePaginatedHero(+page, +limit, (1000 * 60 * 5));
+    const { data: heroesResponse } = usePaginatedHero(+page, +limit, category, (1000 * 60 * 5));
 
     // const { data: summary } = useQuery({
     //     queryKey: ['summary-info'],
@@ -73,12 +74,15 @@ export const HomePage = () => {
                         <TabsTrigger
                             onClick={() => setSearchParams((prev) => {
                                 prev.set("tab", "all");
+                                prev.set("category", 'all');
+                                prev.set("page", "1");
                                 return prev;
                             })}
                             value="all">All Characters ({summary?.totalHeroes})</TabsTrigger>
                         <TabsTrigger
                             onClick={() => setSearchParams((prev) => {
                                 prev.set("tab", "favorites");
+                                prev.set("page", "1");
                                 return prev;
                             })}
                             value="favorites" className="flex items-center gap-2">
@@ -88,11 +92,15 @@ export const HomePage = () => {
                         <TabsTrigger
                             onClick={() => setSearchParams((prev) => {
                                 prev.set("tab", "heroes");
+                                prev.set("category", 'hero');
+                                prev.set("page", "1");
                                 return prev;
                             })} value="heroes">Heroes ({summary?.heroCount})</TabsTrigger>
                         <TabsTrigger
                             onClick={() => setSearchParams((prev) => {
                                 prev.set("tab", "villains");
+                                prev.set("category", 'villain');
+                                prev.set("page", "1");
                                 return prev;
                             })}
                             value="villains">Villains ({summary?.villainCount})</TabsTrigger>
@@ -104,17 +112,17 @@ export const HomePage = () => {
                         <h1>Favorites</h1>
                     </TabsContent>
                     <TabsContent value="heroes">
-                        <h1>Heroes</h1>
+                        <HeroGrid heroes={heroesResponse?.heroes ?? []} />
                     </TabsContent>
                     <TabsContent value="villains">
-                        <h1>Villains</h1>
+                        <HeroGrid heroes={heroesResponse?.heroes ?? []} />
                     </TabsContent>
                 </Tabs>
 
                 {/* Results info */}
                 <div className="flex justify-between items-center mb-6">
                     <div className="flex items-center gap-4">
-                        <p className="text-gray-600">Showing 6 of 16 characters</p>
+                        <p className="text-gray-600">Showing {heroesResponse?.heroes.length} of {heroesResponse?.total} characters</p>
                         <Badge variant="secondary" className="flex items-center gap-1">
                             <Filter className="h-3 w-3" />
                             Filtered
