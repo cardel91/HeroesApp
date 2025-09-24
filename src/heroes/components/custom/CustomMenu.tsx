@@ -13,18 +13,18 @@ export const CustomMenu = () => {
 
 
     return (
-        <NavigationMenu>
+        <NavigationMenu className='py-4'>
             <NavigationMenuList>
                 {/* HOME */}
                 <NavigationMenuItem>
                     <NavigationMenuLink asChild className={cn(isActive("/") && 'bg-slate-200', 'rounded-md p-2')}>
-                        <Link to="/">Home</Link>
+                        <Link to="/">Inicio</Link>
                     </NavigationMenuLink>
                 </NavigationMenuItem>
                 {/* Search */}
                 <NavigationMenuItem>
                     <NavigationMenuLink asChild className={cn(isActive("/search") && 'bg-slate-200', 'rounded-md p-2')}>
-                        <Link to="/search">Search</Link>
+                        <Link to="/search">Buscar</Link>
                     </NavigationMenuLink>
                 </NavigationMenuItem>
             </NavigationMenuList>
