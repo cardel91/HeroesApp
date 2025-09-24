@@ -4,8 +4,13 @@ import { HeroStatsCard } from "./HeroStatsCard"
 // import { useQuery } from "@tanstack/react-query"
 // import { getSummaryAction } from "../actions/get-summary.action"
 import { useHeroSummary } from "../hooks/useHeroSummary"
+import { use } from "react"
+import { FavoriteHeroContext } from "../context/FavoriteHeroContext"
 
 export const HeroStats = () => {
+
+    const { favorites, favoriteCount } = use(FavoriteHeroContext);
+
 
     // const { data: summary } = useQuery({ 
     //     queryKey: ['summary-info'],
@@ -37,8 +42,8 @@ export const HeroStats = () => {
                 title="Favorites"
                 icon={<Heart className="h-4 w-4 text-muted-foreground" />}
             >
-                <div className="text-2xl font-bold text-red-600">3</div>
-                <p className="text-xs text-muted-foreground">18.8% of total</p>
+                <div className="text-2xl font-bold text-red-600">{favoriteCount}</div>
+                <p className="text-xs text-muted-foreground">{(favoriteCount / 25) * 100}% of total</p>
             </HeroStatsCard>
 
             <HeroStatsCard

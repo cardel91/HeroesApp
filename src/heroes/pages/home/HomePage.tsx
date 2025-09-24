@@ -13,16 +13,18 @@ import { CustomBreadcrumbs } from "@/heroes/components/custom/CustomBreadcrumbs"
 // import { getHeroesByPageAction } from "@/heroes/actions/get-heroes-by-page.action"
 // import { useQuery } from "@tanstack/react-query"
 import { useSearchParams } from "react-router"
-import { useMemo } from "react"
+import { use, useMemo } from "react"
 // import { getSummaryAction } from "@/heroes/actions/get-summary.action"
 import { useHeroSummary } from "@/heroes/hooks/useHeroSummary"
 import { usePaginatedHero } from "@/heroes/hooks/usePaginatedHero"
+import { FavoriteHeroContext } from "@/heroes/context/FavoriteHeroContext"
 
 
 
 export const HomePage = () => {
 
     const [searchParams, setSearchParams] = useSearchParams();
+    const { favoriteCount, favorites } = use(FavoriteHeroContext);
 
     const activeTab = searchParams.get("tab") ?? "all";
     const page = searchParams.get("page") ?? "1";
@@ -87,7 +89,7 @@ export const HomePage = () => {
                             })}
                             value="favorites" className="flex items-center gap-2">
                             <Heart className="h-4 w-4" />
-                            Favorites (3)
+                            Favorites ({favoriteCount})
                         </TabsTrigger>
                         <TabsTrigger
                             onClick={() => setSearchParams((prev) => {
@@ -109,7 +111,7 @@ export const HomePage = () => {
                         <HeroGrid heroes={heroesResponse?.heroes ?? []} />
                     </TabsContent>
                     <TabsContent value="favorites">
-                        <h1>Favorites</h1>
+                        <HeroGrid heroes={favorites ?? []} />
                     </TabsContent>
                     <TabsContent value="heroes">
                         <HeroGrid heroes={heroesResponse?.heroes ?? []} />
@@ -119,22 +121,32 @@ export const HomePage = () => {
                     </TabsContent>
                 </Tabs>
 
-                {/* Results info */}
-                <div className="flex justify-between items-center mb-6">
-                    <div className="flex items-center gap-4">
-                        <p className="text-gray-600">Showing {heroesResponse?.heroes.length} of {heroesResponse?.total} characters</p>
-                        <Badge variant="secondary" className="flex items-center gap-1">
-                            <Filter className="h-3 w-3" />
-                            Filtered
-                        </Badge>
-                    </div>
-                </div>
+
 
                 {/* Character Grid */}
                 {/* <HeroGrid /> */}
 
                 {/* Pagination */}
-                <CustomPagination totalPages={heroesResponse?.pages ?? 1} />
+                {
+                    selectedTab !== 'favorites' && (
+                        <>
+                            {/* Results info */}
+                            <div className="flex justify-between items-center mb-6">
+                                <div className="flex items-center gap-4">
+                                    <p className="text-gray-600">Showing {heroesResponse?.heroes.length} of {heroesResponse?.total} characters</p>
+                                    <Badge variant="secondary" className="flex items-center gap-1">
+                                        <Filter className="h-3 w-3" />
+                                        Filtered
+                                    </Badge>
+                                </div>
+                            </div>
+                            <CustomPagination totalPages={heroesResponse?.pages ?? 1} />
+
+                        </>
+
+                    )
+                }
+
             </>
         </>
     )
