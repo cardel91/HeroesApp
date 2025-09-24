@@ -7,7 +7,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
 import { HeadComponent } from "@/components/custom/HeadComponent"
 import { HeroStats } from "@/heroes/components/HeroStats"
 import { HeroGrid } from "@/heroes/components/HeroGrid"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { CustomPagination } from "@/heroes/components/custom/CustomPagination"
 import { CustomBreadcrumbs } from "@/heroes/components/custom/CustomBreadcrumbs"
 import { getHeroesByPageAction } from "@/heroes/actions/get-heroes-by-page.action"
@@ -22,11 +22,12 @@ export const HomePage = () => {
         "heroes" |
         "villains">("all");
 
-    const { data } = useQuery({
+    const { data: heroesResponse } = useQuery({
         queryKey: ['heroes'],
         queryFn: () => getHeroesByPageAction(),
         staleTime: 1000 * 60 * 5
-    })
+    });
+
 
 
 
@@ -54,7 +55,7 @@ export const HomePage = () => {
                         <TabsTrigger onClick={() => setActiveTab('villains')} value="villains">Villains (2)</TabsTrigger>
                     </TabsList>
                     <TabsContent value="all">
-                        <h1>All characters</h1>
+                        <HeroGrid heroes={heroesResponse?.heroes ?? []} />
                     </TabsContent>
                     <TabsContent value="favorites">
                         <h1>Favorites</h1>
@@ -79,7 +80,7 @@ export const HomePage = () => {
                 </div>
 
                 {/* Character Grid */}
-                <HeroGrid />
+                {/* <HeroGrid /> */}
 
                 {/* Pagination */}
                 <CustomPagination totalPages={6} />
