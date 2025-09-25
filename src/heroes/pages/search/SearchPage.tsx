@@ -11,9 +11,10 @@ import { HeroGrid } from "@/heroes/components/HeroGrid";
 const SearchPage = () => {
     const [searchParams] = useSearchParams();
     const name = searchParams.get("name") ?? undefined;
+    const strength = Number(searchParams.get('strength') ?? 0);
     const { data: heroes = [] } = useQuery({
-        queryKey: ["search", { name }],
-        queryFn: () => searchHeroesAction({ name }),
+        queryKey: ["search", { name, strength }],
+        queryFn: () => searchHeroesAction({ name, strength }),
         staleTime: 1000 + 60 + 5
     });
 

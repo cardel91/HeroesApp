@@ -9,7 +9,7 @@ interface Options {
     category?: string;
     universe?: string;
     status?: string;
-    strength?: string;
+    strength?: number;
 }
 
 export const searchHeroesAction = async ({ name, team, category, universe, status, strength }: Options) => {
