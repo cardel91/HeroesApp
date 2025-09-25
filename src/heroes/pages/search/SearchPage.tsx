@@ -1,7 +1,7 @@
 import { HeadComponent } from "@/components/custom/HeadComponent";
 import { HeroStats } from "@/heroes/components/HeroStats";
 import { SearchControls } from "./ui/SearchControls";
-import { CustomBreadcrumbs } from "@/heroes/components/custom/CustomBreadCrumbs";
+import { CustomBreadcrumbs } from "@/heroes/components/custom/CustomBreadcrumbs";
 
 
 const SearchPage = () => {
