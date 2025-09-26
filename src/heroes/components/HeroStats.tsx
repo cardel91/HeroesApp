@@ -9,7 +9,7 @@ import { FavoriteHeroContext } from "../context/FavoriteHeroContext"
 
 export const HeroStats = () => {
 
-    const { favorites, favoriteCount } = use(FavoriteHeroContext);
+    const { favoriteCount } = use(FavoriteHeroContext);
 
 
     // const { data: summary } = useQuery({ 
