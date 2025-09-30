@@ -20,6 +20,9 @@ export const HeroStats = () => {
 
     const { data: summary } = useHeroSummary();
 
+    if (!summary) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
@@ -42,8 +45,8 @@ export const HeroStats = () => {
                 title="Favorites"
                 icon={<Heart className="h-4 w-4 text-muted-foreground" />}
             >
-                <div className="text-2xl font-bold text-red-600">{favoriteCount}</div>
-                <p className="text-xs text-muted-foreground">{(favoriteCount / 25) * 100}% of total</p>
+                <div data-testid="favorite-count" className="text-2xl font-bold text-red-600">{favoriteCount}</div>
+                <p data-testid="favorite-percent" className="text-xs text-muted-foreground">{(favoriteCount / 25) * 100}% of total</p>
             </HeroStatsCard>
 
             <HeroStatsCard
