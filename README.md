@@ -1,69 +1,95 @@
-# React + TypeScript + Vite
+# ⚔️ Heroes App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A single-page application (SPA) for managing and exploring heroes, built during **Sections 13 to 17** of the *React: De cero a experto - Edición 2025* course by Fernando Herrera on Udemy.
 
-Currently, two official plugins are available:
+The app demonstrates advanced React concepts such as custom hooks, routing with React Router, state management with TanStack Query, UI components with shadcn/ui, and frontend testing with Vitest.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## ✨ Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- 🔍 Browse and search heroes  
+- 📄 View hero details and navigate between different routes  
+- 🔐 Authentication and protected routes  
+- ♻️ Built with React functional components and **custom hooks**  
+- 🧭 Navigation with **React Router**  
+- 📦 Data fetching and caching with **TanStack Query (React Query)**  
+- 🎨 UI components powered by **shadcn/ui**  
+- 🧪 Unit and integration tests using **Vitest**  
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+## 🛠️ Technologies Used
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+| Tech | Description |
+|------|-------------|
+| ⚛️ [React](https://reactjs.org) | Frontend UI library |
+| 🧭 [React Router](https://reactrouter.com) | Client-side routing |
+| 📦 [TanStack Query](https://tanstack.com/query) | Data fetching & caching |
+| 🎨 [shadcn/ui](https://ui.shadcn.com) | UI primitives and components |
+| 🧪 [Vitest](https://vitest.dev) | Fast unit/integration testing framework |
+| ⚡ Vite | Fast dev server and build tool |
+
+---
+
+## 🧪 Running Tests
+
+To run the tests with Vitest:
+
+```bash
+npm run test
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Includes unit and integration tests for hooks, components, and routes.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 🚀 Getting Started
+
+1. **Clone the repo**
+
+   ```bash
+   git clone https://github.com/cardel91/HeroesApp.git
+   cd HeroesApp
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   npm install
+   ```
+
+3. **Run the dev server**
+
+   ```bash
+   npm run dev
+   ```
+
+4. **Explore the app**  
+   - 🔑 Login to access protected routes  
+   - 🦸 Browse heroes and view details  
+   - 🧭 Navigate between sections with React Router  
+
+---
+
+## 📚 What You’ll Learn
+
+- How to structure a SPA with React Router and protected routes  
+- How to build and reuse **custom hooks**  
+- How to fetch and cache server state with **TanStack Query**  
+- How to integrate a UI component system like **shadcn/ui**  
+- How to test React apps with **Vitest**  
+- Best practices for modular architecture in React  
+
+---
+
+## 🎓 Course Reference
+
+> Course: [React: De cero a experto - Edición 2025](https://www.udemy.com)  
+> Instructor: Fernando Herrera  
+
+---
+
+## 📄 License
+
+This project is for educational purposes as part of the Udemy course and is not intended for commercial use.
