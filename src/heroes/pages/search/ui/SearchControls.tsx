@@ -5,7 +5,7 @@ import {
     Accordion,
     AccordionContent,
     AccordionItem,
-    AccordionTrigger,
+    // AccordionTrigger,
 } from "@/components/ui/accordion"
 import { Search, Filter, SortAsc, Grid, Plus } from "lucide-react"
 import React, { useRef } from "react"
@@ -85,9 +85,9 @@ export const SearchControls = () => {
                 </div>
             </div >
             {/* Advanced Filters */}
-            < Accordion type="single" collapsible value={activeAccordion} >
+            <Accordion data-testid="accordion" type="single" collapsible value={activeAccordion} >
                 <AccordionItem value="advanced-filters">
-                    <AccordionTrigger>Is it accessible?</AccordionTrigger>
+                    {/* <AccordionTrigger>Advanced filters</AccordionTrigger> */}
                     <AccordionContent>
                         <div className="bg-white rounded-lg p-6 mb-8 shadow-sm border">
                             <div className="flex justify-between items-center mb-4">
