@@ -68,7 +68,17 @@ describe('AppRouter', () => {
 
         expect(await screen.findByTestId('search')).toBeDefined();
         // expect(await screen.findByText('Universo de heroes')).toBeDefined();
-        screen.debug();
+        // screen.debug();
+
+    });
+
+    test('should redirect to home page for unknown routes', () => {
+        const memoryRouter = createMemoryRouter(router.routes, {
+            initialEntries: ['/algo']
+        });
+
+        render(<RouterProvider router={memoryRouter} />);
+        expect(screen.getByTestId('home-page')).toBeDefined();
 
     });
 });
