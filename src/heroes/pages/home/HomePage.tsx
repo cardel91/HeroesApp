@@ -47,7 +47,7 @@ export const HomePage = () => {
     //     staleTime: 1000 * 60 * 5
     // });
 
-    const { data: heroesResponse } = usePaginatedHero(+page, +limit, category, (1000 * 60 * 5));
+    const { data: heroesResponse } = usePaginatedHero(+page, +limit, category);
 
     // const { data: summary } = useQuery({
     //     queryKey: ['summary-info'],
@@ -111,7 +111,7 @@ export const HomePage = () => {
                         <HeroGrid heroes={heroesResponse?.heroes ?? []} />
                     </TabsContent>
                     <TabsContent value="favorites">
-                        <HeroGrid heroes={favorites ?? []} />
+                        <HeroGrid heroes={favorites} />
                     </TabsContent>
                     <TabsContent value="heroes">
                         <HeroGrid heroes={heroesResponse?.heroes ?? []} />
@@ -133,7 +133,7 @@ export const HomePage = () => {
                             {/* Results info */}
                             <div className="flex justify-between items-center mb-6">
                                 <div className="flex items-center gap-4">
-                                    <p className="text-gray-600">Showing {heroesResponse?.heroes.length} of {heroesResponse?.total} characters</p>
+                                    <p className="text-gray-600">Showing {heroesResponse?.heroes?.length} of {heroesResponse?.total} characters</p>
                                     <Badge variant="secondary" className="flex items-center gap-1">
                                         <Filter className="h-3 w-3" />
                                         Filtered
